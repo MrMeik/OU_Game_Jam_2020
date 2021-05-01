@@ -17,8 +17,12 @@ public class PlayerMovement : MovingObject
 
     [SerializeField]
     private GameObject gunAnchor;
-    
+
+    public bool Firing = false;
+
     private CharacterController controller;
+
+    private PlayerController playerController;
 
     private Camera cam;
 
@@ -27,6 +31,7 @@ public class PlayerMovement : MovingObject
     {
         cam = Camera.main;
         controller = GetComponent<CharacterController>();
+        playerController = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -38,7 +43,10 @@ public class PlayerMovement : MovingObject
             controller.Move(velocity * Time.fixedDeltaTime);
         }
         else velocity = Vector3.zero;
-        if(CanTurn && targetAim != Vector2.zero) gunAnchor.transform.localRotation = Quaternion.LookRotation(new Vector3(targetAim.x, 0, targetAim.y), Vector3.up);
+        if (CanTurn && targetAim != Vector2.zero) 
+            gunAnchor.transform.localRotation = Quaternion.LookRotation(new Vector3(targetAim.x, 0, targetAim.y), Vector3.up);
+
+        playerController.Shoot(Firing);
     }
 
 
@@ -46,7 +54,7 @@ public class PlayerMovement : MovingObject
     {
         if (CanTurn)
         {
-            if(context.control.parent.name == "Mouse")
+            if (context.control.parent.name == "Mouse")
             {
                 var playerPos = cam.WorldToScreenPoint(transform.position);
                 var mousePos = context.ReadValue<Vector2>();
@@ -58,10 +66,15 @@ public class PlayerMovement : MovingObject
             {
                 targetAim = context.ReadValue<Vector2>();
                 targetAim.Normalize();
+                if (targetAim.magnitude > 0.1f) Firing = true;
+                else Firing = false;
             }
             //Debug.Log(context.control.parent.name);
             //if (context.control.path)
-            
+        }
+        else
+        {
+            Firing = false;
         }
     }
 

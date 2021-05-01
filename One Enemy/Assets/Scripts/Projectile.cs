@@ -9,13 +9,17 @@ public class Projectile : MonoBehaviour
 
     private Vector3 movementDirection;
     private int killId = -1;
-    private Collider lastHit = null;
     private Rigidbody projRB;
+
+    private List<Collider> ignoredColliders = new List<Collider>();
+    private Collider ownCollider;
 
     void Start()
     {
         movementDirection = transform.forward;
         projRB = GetComponent<Rigidbody>();
+        ownCollider = GetComponent<Collider>();
+        foreach (Collider col in ignoredColliders) Physics.IgnoreCollision(ownCollider, col);
         ResetKillTimer();
     }
 
@@ -30,14 +34,15 @@ public class Projectile : MonoBehaviour
         var collider = collision.collider;
         if (collider.CompareTag("Shield"))
         {
-            if (collider == lastHit) return;
             var shield = collider.GetComponent<Shield>();
             if (shield.IsOn())
             {
                 if (shield.IsEngaging())
                 {
-                    lastHit = collider;
+                    ClearCollisions();
+                    IgnoreCollision(collider);
                     ReflectAcross(collision.GetContact(0).normal);
+                    FlightSpeed += (int)(FlightSpeed * 0.25f);
                 }
                 else BlowUp();
             }
@@ -49,6 +54,19 @@ public class Projectile : MonoBehaviour
             BlowUp();
         }
         else BlowUp();
+    }
+
+    public void IgnoreCollision(Collider collider)
+    {
+        ignoredColliders.Add(collider);
+        if(ownCollider != null) Physics.IgnoreCollision(ownCollider, collider);
+    }
+
+    public void ClearCollisions()
+    {
+        foreach (var collider in ignoredColliders)
+            Physics.IgnoreCollision(ownCollider, collider, false);
+        ignoredColliders.Clear();
     }
 
     private void ResetKillTimer()

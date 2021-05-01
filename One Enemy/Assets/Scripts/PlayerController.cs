@@ -9,8 +9,11 @@ public class PlayerController : MonoBehaviour
     private Shield shield;
     [SerializeField]
     private PlayerMovement movement;
+    [SerializeField]
+    private ProjectileLauncher weapon;
 
     private bool hasShield = true;
+
 
     public void OnShieldButton(CallbackContext context)
     {
@@ -29,15 +32,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void Shoot(bool state)
     {
-        
+        if (state) weapon.Fire();
+        else weapon.HaltFire();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnShoot(CallbackContext context)
     {
-        
+        if (movement.CanTurn)
+        {
+            if (context.started) movement.Firing = true;
+            else if (context.performed != true) movement.Firing = false;
+        }
+        else movement.Firing = false;
     }
 }

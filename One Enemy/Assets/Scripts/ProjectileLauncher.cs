@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ProjectileLauncher : MonoBehaviour
 {
+    public bool FireOnStart = false;
     public bool LoopFire = false;
     public float RefireRate = 0.05f;
 
@@ -17,28 +18,51 @@ public class ProjectileLauncher : MonoBehaviour
     private MovingObject movementSource;
 
     private int fireId = -1;
+    private bool canFireAgain = true;
 
     public void Start()
     {
-        Fire();
+        if(FireOnStart) Fire();
     }
 
-    public void Fire()
+    public void HaltFire()
     {
-        LeanTween.cancel(fireId);
-        
+        if (fireId != -1)
+        {
+            var descr = LeanTween.descr(fireId);
+            if(descr == null)
+            {
+                canFireAgain = true;
+            }
+            else
+            {
+                float timeLeft = descr.time - descr.passed;
+
+                if (timeLeft == 0) canFireAgain = true;
+                else LeanTween.delayedCall(timeLeft, () => canFireAgain = true);
+                LeanTween.cancel(fireId);
+            }
+            fireId = -1;
+        }
+    }
+
+    public void Fire(bool checkCanFire = true)
+    {
+        if (checkCanFire && canFireAgain is false) return;
+        HaltFire();
+
         var newObj = Instantiate(projectilePrefab, ejectionPoint.transform.position, this.transform.rotation, BulletCollector.Instance.transform);
-        if(sourceColliders.Length != 0) foreach(var collider in sourceColliders) Physics.IgnoreCollision(newObj.GetComponent<Collider>(), collider);
-        
-        if(movementSource != null)
+        var projectile = newObj.GetComponent<Projectile>();
+        if (sourceColliders.Length != 0) foreach (var collider in sourceColliders) projectile.IgnoreCollision(collider);
+
+        if (movementSource != null)
         {
             var sourceVelocity = movementSource.GetVelocity();
             float deltaSpeed = Vector3.Dot(transform.forward, sourceVelocity);
-            if(deltaSpeed > 0) newObj.GetComponent<Projectile>().FlightSpeed += Mathf.RoundToInt(deltaSpeed);
-            //Debug.Log(deltaSpeed);
-                //Vector3.Project(sourceVelocity, transform.forward);
+            if(deltaSpeed > 0) projectile.FlightSpeed += Mathf.RoundToInt(deltaSpeed);
         }
 
-        if(LoopFire) fireId = LeanTween.delayedCall(RefireRate, () => Fire()).id;
+        if(LoopFire) fireId = LeanTween.delayedCall(RefireRate, () => Fire(false)).id;
+        canFireAgain = false;
     }
 }
