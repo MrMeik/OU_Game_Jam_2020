@@ -36,8 +36,6 @@ public class CoilsController : MonoBehaviour
     {
         float distance = Vector3.Distance(Coil1.transform.localPosition, Coil2.transform.localPosition);
         boxCollider.size = new Vector3(distance, 2, 0.25f);
-
-
     }
 
     private void CreateCenteredBoxCollider()
