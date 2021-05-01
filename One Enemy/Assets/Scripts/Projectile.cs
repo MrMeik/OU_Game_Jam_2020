@@ -41,7 +41,6 @@ public class Projectile : MonoBehaviour
                 }
                 else BlowUp();
             }
-
         }
         else if (collider.CompareTag("Player"))
         {
