@@ -5,15 +5,16 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public int FlightSpeed = 10;
-    public Vector3 MovementDirection;
+    public int MaxLifeTime = 5;
 
-    private int MaxLifeTime = 5;
+    private Vector3 movementDirection;
     private int killId = -1;
     private Collider lastHit = null;
     private Rigidbody projRB;
 
     void Start()
     {
+        movementDirection = transform.forward;
         projRB = GetComponent<Rigidbody>();
         ResetKillTimer();
     }
@@ -21,7 +22,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        projRB.MovePosition(transform.position + MovementDirection * FlightSpeed * Time.deltaTime);
+        projRB.MovePosition(transform.position + movementDirection * FlightSpeed * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -67,6 +68,6 @@ public class Projectile : MonoBehaviour
     private void ReflectAcross(Vector3 normal)
     {
         ResetKillTimer();
-        MovementDirection = Vector3.Reflect(MovementDirection, -normal);
+        movementDirection = Vector3.Reflect(movementDirection, -normal);
     }
 }
