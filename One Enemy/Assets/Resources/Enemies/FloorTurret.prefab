@@ -53,12 +53,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanShield: 1
   DeployHeight: 1
-  ReactionTime: 0.1
+  ReactionTime: 0.25
   shield: {fileID: 2438842690643846922}
   weaponArm: {fileID: 7813799648108955073}
   weapon: {fileID: 2898227701595595314}
   indicator: {fileID: 6245373841427723588}
   health: {fileID: 2099026557789683494}
+  status: 0
 --- !u!136 &4512260057024246510
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -791,6 +792,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2898227700798604237}
     m_Modifications:
+    - target: {fileID: 8993030012484387892, guid: 8507ecf1a0683e54e8c7ef610749f055, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993030012484387892, guid: 8507ecf1a0683e54e8c7ef610749f055, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993030013690084149, guid: 8507ecf1a0683e54e8c7ef610749f055, type: 3}
+      propertyPath: DecayTime
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993030013690084149, guid: 8507ecf1a0683e54e8c7ef610749f055, type: 3}
+      propertyPath: FullyChargedTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8993030013690084149, guid: 8507ecf1a0683e54e8c7ef610749f055, type: 3}
+      propertyPath: ShieldEngageTime
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 8993030013690084296, guid: 8507ecf1a0683e54e8c7ef610749f055, type: 3}
       propertyPath: m_Name
       value: Shield

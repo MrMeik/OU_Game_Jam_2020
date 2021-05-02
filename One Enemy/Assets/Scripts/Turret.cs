@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,6 +44,17 @@ public class Turret : MonoBehaviour
         if (status != Status.Firing) weapon.HaltFire();
         switch (status)
         {
+            case Status.Hidden:
+                if (retargetCurrentTime >= retargetTime)
+                {
+                    if (CanSeePlayer())
+                    {
+                        Deploy();
+                    }
+                    retargetCurrentTime -= retargetTime;
+                }
+                else retargetCurrentTime += Time.deltaTime;
+                break;
             case Status.Deployed:
                 if(retargetCurrentTime >= retargetTime)
                 {
@@ -50,13 +62,22 @@ public class Turret : MonoBehaviour
                     {
                         status = Status.Firing;
                     }
-                    else retargetCurrentTime -= retargetTime;
+                    retargetCurrentTime -= retargetTime;
                 }
                 else retargetCurrentTime += Time.deltaTime;
                 break;
             case Status.Firing:
                 weapon.transform.LookAt(PlayerController.Instance.Position(), Vector3.up);
                 weapon.Fire();
+                if (retargetCurrentTime >= retargetTime)
+                {
+                    if (!CanSeePlayer())
+                    {
+                        status = Status.Deployed;
+                    }
+                    retargetCurrentTime -= retargetTime;
+                }
+                else retargetCurrentTime += Time.deltaTime;
                 break;
             case Status.Shielding:
                 if(shieldingId == -1) //shield.IsOn() && !shield.IsEngaging())
@@ -91,6 +112,7 @@ public class Turret : MonoBehaviour
         {
             var proj = other.GetComponent<Projectile>();
             if (proj.IsIgnoringCollision(hitbox)) return;
+            if (ShouldBeScared(proj) is false) return; 
             status = Status.Shielding;
             indicator.Flash(Indicator.Type.Purple);
             shieldingId = LeanTween.delayedCall(ReactionTime, () => { shield.EngageShield(); shieldingId = -1; }).id;
@@ -101,6 +123,14 @@ public class Turret : MonoBehaviour
             indicator.Flash(Indicator.Type.Purple);
             shieldingId = LeanTween.delayedCall(ReactionTime, () => { shield.EngageShield(); shieldingId = -1; }).id;
         }
+    }
+
+    private bool ShouldBeScared(Projectile proj)
+    {
+        var projPos = proj.transform.position;
+        var projDelta = proj.MovementDirection;
+        var toMe = (transform.position - projPos).normalized;
+        return Vector3.Angle(projDelta, toMe) < 30f;
     }
 
     private void StopShielding()

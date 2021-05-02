@@ -31,6 +31,8 @@ public class Projectile : MonoBehaviour
 
     private AudioSource source;
 
+    public Vector3 MovementDirection => movementDirection;
+
     void Start()
     {
         movementDirection = transform.forward;
