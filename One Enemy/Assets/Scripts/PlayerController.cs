@@ -18,6 +18,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private bool hasShield = false;
 
+    private float shieldInputCounter = 0f;
+
+    private bool turnShieldOn = false;
+    private bool turnShieldOff = false;
+
     private void Start()
     {
         Instance = this;
@@ -35,19 +40,48 @@ public class PlayerController : MonoBehaviour
         return pos;
     }
 
+    public void Update()
+    {
+        if(shieldInputCounter <= 0f)
+        {
+            if (turnShieldOn)
+            {
+                shield.EngageShield();
+                movement.CanMove = false;
+                movement.CanTurn = false;
+                turnShieldOn = false;
+                shieldInputCounter = 1f;
+            }
+        }
+        else
+        {
+            shieldInputCounter -= Time.deltaTime;
+        }
+
+        if (turnShieldOff)
+        {
+            shield.DisengageShield();
+            movement.CanMove = true;
+            movement.CanTurn = true;
+            turnShieldOff = false;
+        }
+    }
+
     public void OnShieldButton(CallbackContext context)
     {
         if (hasShield)
         {
             if (context.started)
             {
-                shield.EngageShield();
-                movement.CanMove = false;
+                turnShieldOn = true;
+                //shield.EngageShield();
+                //movement.CanMove = false;
             }
             else if (context.performed is false)
             {
-                shield.DisengageShield();
-                movement.CanMove = true;
+                turnShieldOff = true;
+                //shield.DisengageShield();
+                //movement.CanMove = true;
             }
         }
     }

@@ -24136,6 +24136,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1345483635}
     m_Modifications:
+    - target: {fileID: 2438842690643846922, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
+      propertyPath: DecayTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438842690643846922, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
+      propertyPath: FullyChargedTime
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2438842690643846922, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
+      propertyPath: ShieldEngageTime
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 2898227700798604234, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
       propertyPath: ReactionTime
       value: 0.22
@@ -57037,6 +57049,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2075374538}
     m_Modifications:
+    - target: {fileID: 8993030013690084149, guid: 8507ecf1a0683e54e8c7ef610749f055, type: 3}
+      propertyPath: ShieldEngageTime
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8993030013690084296, guid: 8507ecf1a0683e54e8c7ef610749f055, type: 3}
       propertyPath: m_Name
       value: Shield
