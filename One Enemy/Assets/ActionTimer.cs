@@ -24,7 +24,6 @@ public class ActionTimer : MonoBehaviour
         if (count && !completed)
         {
             currentTime -= Time.deltaTime;
-            Debug.Log(currentTime);
             if(currentTime <= 0)
             {
                 TimerComplete?.Invoke();
