@@ -68,6 +68,7 @@ public class ProjectileLauncher : MonoBehaviour
             extraPizzazz.Play();
             projectile.FlightSpeed *= 2;
             projectile.IgnoreShields = true;
+            projectile.Damage *= 3;
         }
         else if (MegaFire) projectile.FlightSpeed = (int)(projectile.FlightSpeed * 1.5f);
 
