@@ -2001,6 +2001,10 @@ PrefabInstance:
       propertyPath: OnDead.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2898227700798604234, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
+      propertyPath: ReactionTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2898227700798604235, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
       propertyPath: m_Name
       value: FloorTurret
@@ -4991,7 +4995,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4508343992482359541, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
       propertyPath: m_Radius
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8063729552635789565, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
       propertyPath: WriteDebug
@@ -5410,7 +5414,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 997479760aa29fa4097b155aa6984710, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10300,6 +10304,87 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbebc83c31319164e863ca17ad790d5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &585987176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 585987177}
+  - component: {fileID: 585987179}
+  - component: {fileID: 585987178}
+  m_Layer: 7
+  m_Name: Eye
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &585987177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585987176}
+  m_LocalRotation: {x: -0, y: -0, z: 0.38268346, w: 0.9238795}
+  m_LocalPosition: {x: 1.5970005, y: 1.5970006, z: -1.4420013}
+  m_LocalScale: {x: 2.34, y: 1.665, z: 2.52}
+  m_Children: []
+  m_Father: {fileID: 1853460566}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!23 &585987178
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585987176}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: f90935d5d7b8861448981eb5f5d8e782, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &585987179
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585987176}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &626275877
 GameObject:
   m_ObjectHideFlags: 0
@@ -14590,6 +14675,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 626275877}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnPlayerExit:
     m_PersistentCalls:
       m_Calls: []
@@ -18185,7 +18282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4508343992482359541, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
       propertyPath: m_Radius
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
@@ -21685,6 +21782,10 @@ PrefabInstance:
     - target: {fileID: 2099026557789683494, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
       propertyPath: OnDead.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2898227700798604234, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
+      propertyPath: ReactionTime
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2898227700798604235, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
       propertyPath: m_Name
@@ -28653,6 +28754,10 @@ PrefabInstance:
       propertyPath: OnDead.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2898227700798604234, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
+      propertyPath: ReactionTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2898227700798604235, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
       propertyPath: m_Name
       value: FloorTurret (3)
@@ -28900,6 +29005,10 @@ PrefabInstance:
     - target: {fileID: 2099026557789683494, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
       propertyPath: OnDead.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2898227700798604234, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
+      propertyPath: ReactionTime
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2898227700798604235, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
       propertyPath: m_Name
@@ -29330,7 +29439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4508343992482359541, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
       propertyPath: m_Radius
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
@@ -33585,6 +33694,10 @@ PrefabInstance:
     - target: {fileID: 2099026557789683494, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
       propertyPath: OnDead.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2898227700798604234, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
+      propertyPath: ReactionTime
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2898227700798604235, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
       propertyPath: m_Name
@@ -39166,7 +39279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4508343992482359541, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
       propertyPath: m_Radius
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
@@ -41154,7 +41267,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.25}
-  m_Children: []
+  m_Children:
+  - {fileID: 585987177}
   m_Father: {fileID: 1404449372}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}

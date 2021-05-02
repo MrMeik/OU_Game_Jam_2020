@@ -70,7 +70,6 @@ AudioMixerGroupController:
   m_Pitch: d2dfc69566d141745bef1615e053f91e
   m_Send: 00000000000000000000000000000000
   m_Effects:
-  - {fileID: 5214846831324365009}
   - {fileID: -3226639138539544011}
   - {fileID: -8607731640715622482}
   m_UserColorIndex: 0
@@ -143,47 +142,12 @@ AudioMixerSnapshotController:
   m_Name: Snapshot
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 98894f8a473a8d5448766488ea97a6bb
-  m_FloatValues: {}
+  m_FloatValues:
+    babcf5021330e0346bc27aab09e9361d: -5.7224774
+    d2dfc69566d141745bef1615e053f91e: 1
+    3970e0c6b86345d49a17fbaccc354e2b: 0
+    137672d951c268040936afedccf51473: 1
+    64143cdaf50e8df44a847195085b5750: -8.362404
+    fcc8990ba7dfea04b96f67898e4fb642: 0
+    d9c29dae1b04be84187a3fdceaec168e: -10000
   m_TransitionOverrides: {}
---- !u!244 &5214846831324365009
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_EffectID: a07c7d19517e65e42b354998e64e4db7
-  m_EffectName: SFX Reverb
-  m_MixLevel: 5369f3ba092ad5441a5fcb55f7a3270f
-  m_Parameters:
-  - m_ParameterName: Dry Level
-    m_GUID: e508d54bae067eb48ac445f1b9c7b9eb
-  - m_ParameterName: Room
-    m_GUID: fcd7e9137e819a84bbd8530844c18e19
-  - m_ParameterName: Room HF
-    m_GUID: f29fb1b9a83ea9c46bcb7db08276dfd6
-  - m_ParameterName: Decay Time
-    m_GUID: 27a882357ed8d9243b48a439de79c7c7
-  - m_ParameterName: Decay HF Ratio
-    m_GUID: 51099a8993f60c1479e31a03ad9d0033
-  - m_ParameterName: Reflections
-    m_GUID: 1a830f70314929741a64c90e380c78cb
-  - m_ParameterName: Reflect Delay
-    m_GUID: b8013ff1e92cca942a207e6b9a63927e
-  - m_ParameterName: Reverb
-    m_GUID: e4a461c3fb6c36445829e8248b02dc25
-  - m_ParameterName: Reverb Delay
-    m_GUID: 78fdbf000f615d345b922aed22a8a315
-  - m_ParameterName: Diffusion
-    m_GUID: c0a621248df30fe4f8dbf6f1c7dc81a5
-  - m_ParameterName: Density
-    m_GUID: 4ca6b085c57e61747951795d9b1c56cf
-  - m_ParameterName: HF Reference
-    m_GUID: c26203758247cbe44b497891df853284
-  - m_ParameterName: Room LF
-    m_GUID: 68a1f11e3f6b0374aab663fbfc0d1634
-  - m_ParameterName: LF Reference
-    m_GUID: c875524f132a7584bbea1283931484a9
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
