@@ -10112,7 +10112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4508343992482359541, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
       propertyPath: m_Radius
-      value: 10
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8063729552635789565, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
       propertyPath: WriteDebug
@@ -43989,7 +43989,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4508343992482359541, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
       propertyPath: m_Radius
-      value: 10
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47c926c8b593ad844bebab0c6c2cfc15, type: 3}
