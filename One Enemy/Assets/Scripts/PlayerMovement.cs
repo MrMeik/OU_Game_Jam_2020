@@ -49,6 +49,12 @@ public class PlayerMovement : MovingObject
         playerController.Shoot(Firing);
     }
 
+    public void FreezePlayer()
+    {
+        CanMove = false;
+        CanTurn = false;
+        Firing = false;
+    }
 
     public void TeleportTo(Vector3 position)
     {

@@ -11,6 +11,9 @@ public class ActionTimer : MonoBehaviour
 
     [SerializeField]
     private float currentTime;
+    [SerializeField]
+    private UpdateTextUI ui;
+
     private bool count = false;
     public bool completed = false;
 
@@ -29,6 +32,7 @@ public class ActionTimer : MonoBehaviour
                 TimerComplete?.Invoke();
                 completed = true;
             }
+            ui.UpdateText(currentTime);
         }
     }
 
@@ -41,6 +45,6 @@ public class ActionTimer : MonoBehaviour
     public void HaltAndReset()
     {
         count = false;
-        currentTime = StartTime;
+        if(!completed) currentTime = StartTime;
     }
 }

@@ -14,6 +14,7 @@ public class FadeAfterTime : MonoBehaviour
 
     public void SetText(string text)
     {
+        text = text.Replace("NL", "\n");
         tmpText.SetText(text);
     }
 

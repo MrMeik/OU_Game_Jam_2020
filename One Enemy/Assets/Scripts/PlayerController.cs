@@ -23,6 +23,11 @@ public class PlayerController : MonoBehaviour
         Instance = this;
     }
 
+    public void OnQuit(CallbackContext context)
+    {
+        Application.Quit();
+    }
+
     public Vector3 Position()
     {
         Vector3 pos = transform.position;
