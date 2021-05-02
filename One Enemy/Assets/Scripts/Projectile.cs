@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     public int MaxLifeTime = 5;
     public int Damage = 10;
     public bool MegaBullet = false;
+    public bool IgnoreShields = false;
 
     private Vector3 movementDirection;
     private int killId = -1;
@@ -66,6 +67,11 @@ public class Projectile : MonoBehaviour
         }
         if (collider.CompareTag("Shield"))
         {
+            if (IgnoreShields)
+            {
+                Physics.IgnoreCollision(ownCollider, collider);
+                return;
+            }
             var shield = collider.GetComponent<Shield>();
             if (shield.IsOn())
             {

@@ -45,6 +45,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void EnableMega()
+    {
+        weapon.MegaFire = true;
+    }
+
     public void Shoot(bool state)
     {
         if (state) weapon.Fire();

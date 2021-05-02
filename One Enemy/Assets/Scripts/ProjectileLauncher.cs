@@ -7,6 +7,8 @@ public class ProjectileLauncher : MonoBehaviour
     public bool FireOnStart = false;
     public bool LoopFire = false;
     public float RefireRate = 0.05f;
+    public bool MegaFire = false;
+    public bool SuperMegaFire = false;
 
     [SerializeField]
     private GameObject projectilePrefab;
@@ -16,6 +18,8 @@ public class ProjectileLauncher : MonoBehaviour
     private Collider[] sourceColliders;
     [SerializeField]
     private MovingObject movementSource;
+    [SerializeField]
+    private ParticleSystem extraPizzazz;
 
     private AudioSource source;
 
@@ -57,7 +61,15 @@ public class ProjectileLauncher : MonoBehaviour
         source.Play();
         var newObj = Instantiate(projectilePrefab, ejectionPoint.transform.position, this.transform.rotation, BulletCollector.Instance.transform);
         var projectile = newObj.GetComponent<Projectile>();
+        projectile.MegaBullet = MegaFire;
         if (sourceColliders.Length != 0) foreach (var collider in sourceColliders) projectile.IgnoreCollision(collider);
+        if (SuperMegaFire && extraPizzazz != null)
+        {
+            extraPizzazz.Play();
+            projectile.FlightSpeed *= 2;
+            projectile.IgnoreShields = true;
+        }
+        else if (MegaFire) projectile.FlightSpeed = (int)(projectile.FlightSpeed * 1.5f);
 
         if (movementSource != null)
         {
