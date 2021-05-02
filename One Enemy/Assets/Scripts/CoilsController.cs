@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CoilsController : MonoBehaviour
 {
+    public bool StartState = false;
+
     [SerializeField]
     private GameObject Coil1;
     [SerializeField]
@@ -24,7 +26,8 @@ public class CoilsController : MonoBehaviour
         if(Coil1.transform.localPosition.x == Coil2.transform.localPosition.x) SetupXAligned();
         else if(Coil1.transform.localPosition.z == Coil2.transform.localPosition.z) SetupZAligned();
         else throw new System.Exception("Coils not aligned");
-        //TurnOffGate();
+        if (StartState is false) TurnOffGate();
+        else TurnOnGate();
     }
 
     private void SetupXAligned()

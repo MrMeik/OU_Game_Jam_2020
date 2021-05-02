@@ -1529,6 +1529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff6372426e6907c45b521dbf10ba77c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartState: 1
   Coil1: {fileID: 3976909696616478914}
   Coil2: {fileID: 3976909695872624551}
   CoilPS1: {fileID: 3976909695623910103}
@@ -1628,7 +1629,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -6491,7 +6492,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -12786,6 +12787,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3976909696616478941}
     m_Modifications:
+    - target: {fileID: 6844832851659931454, guid: 3aa18394c721a08428166cf4ab1bb278, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6844832853368072277, guid: 3aa18394c721a08428166cf4ab1bb278, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6844832853368072279, guid: 3aa18394c721a08428166cf4ab1bb278, type: 3}
       propertyPath: m_RootOrder
       value: 1

@@ -90,7 +90,7 @@ public class Turret : MonoBehaviour
 
     private bool CanSeePlayer()
     {
-        Vector3 source = weapon.transform.position;
+        Vector3 source = weapon.transform.position + Vector3.up * .1f;
         Vector3 delta = (PlayerController.Instance.Position() - source).normalized;
         return Physics.Raycast(source, delta, out RaycastHit hit) && hit.collider.CompareTag("Player");
     }
