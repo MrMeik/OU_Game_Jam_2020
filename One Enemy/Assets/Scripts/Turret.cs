@@ -125,6 +125,27 @@ public class Turret : MonoBehaviour
         }
     }
 
+    private int hitlightningId = -1;
+    private int hitTotal = 0;
+
+    private void OnParticleCollision(GameObject other)
+    {
+        hitTotal++;
+        if(hitlightningId == -1)
+        {
+            hitlightningId = LeanTween.delayedCall(0.1f, () =>
+            {
+                hitlightningId = -1;
+                if(hitTotal > 0)
+                {
+                    health.ModifyHealth(-hitTotal * 20);
+                }
+                hitTotal = 0;
+
+            }).id;
+        }
+    }
+
     private bool ShouldBeScared(Projectile proj)
     {
         var projPos = proj.transform.position;
