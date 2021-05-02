@@ -24,7 +24,7 @@ public class CoilsController : MonoBehaviour
         if(Coil1.transform.localPosition.x == Coil2.transform.localPosition.x) SetupXAligned();
         else if(Coil1.transform.localPosition.z == Coil2.transform.localPosition.z) SetupZAligned();
         else throw new System.Exception("Coils not aligned");
-        TurnOffGate();
+        //TurnOffGate();
     }
 
     private void SetupXAligned()

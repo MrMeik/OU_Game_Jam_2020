@@ -56,6 +56,7 @@ public class PlayerMovement : MovingObject
         {
             if (context.control.parent.name == "Mouse")
             {
+                if (cam == null) return;
                 var playerPos = cam.WorldToScreenPoint(transform.position);
                 var mousePos = context.ReadValue<Vector2>();
                 targetAim = new Vector2(mousePos.x - playerPos.x, mousePos.y - playerPos.y);
