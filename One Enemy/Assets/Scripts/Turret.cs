@@ -92,7 +92,8 @@ public class Turret : MonoBehaviour
     {
         Vector3 source = weapon.transform.position + Vector3.up * .1f;
         Vector3 delta = (PlayerController.Instance.Position() - source).normalized;
-        return Physics.Raycast(source, delta, out RaycastHit hit) && hit.collider.CompareTag("Player");
+        bool a = Physics.Raycast(source, delta, out RaycastHit hit);
+        return a && hit.collider.CompareTag("Player");
     }
 
     private void OnTriggerEnter(Collider other)
