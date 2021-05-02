@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
     public int FlightSpeed = 10;
     public int MaxLifeTime = 5;
     public int Damage = 10;
+    public bool MegaBullet = false;
 
     private Vector3 movementDirection;
     private int killId = -1;
@@ -58,6 +59,11 @@ public class Projectile : MonoBehaviour
             return;
         }
         var collider = collision.collider;
+        if (MegaBullet && collider.CompareTag("Coil"))
+        {
+            collider.GetComponent<CoilsController>().TurnOffGate();
+            BlowUp(AudioType.Enemy);
+        }
         if (collider.CompareTag("Shield"))
         {
             var shield = collider.GetComponent<Shield>();
