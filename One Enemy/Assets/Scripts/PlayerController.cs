@@ -47,6 +47,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void EnableSuperMega()
+    {
+        weapon.SuperMegaFire = true;
+    }
+
     public void EnableShield()
     {
         hasShield = true;
