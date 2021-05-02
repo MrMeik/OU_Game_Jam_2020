@@ -16,8 +16,9 @@ public class ActionTrigger : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (OnlyOnce && !entered)
+        if (OnlyOnce)
         {
+            if (entered) return;
             if (other.CompareTag("Player"))
             {
                 entered = true;
@@ -37,8 +38,9 @@ public class ActionTrigger : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        if (OnlyOnce && !exited)
+        if (OnlyOnce)
         {
+            if (exited) return;
             if (other.CompareTag("Player"))
             {
                 exited = true;

@@ -128,7 +128,7 @@ public class Projectile : MonoBehaviour
         Explosion.SetActive(true);
         var hitClip = GetClip(clip);
         source.volume *= volumeScaler;
-        source.PlayOneShot(hitClip);
+        if(source.enabled is true) source.PlayOneShot(hitClip);
         Destroy(gameObject, hitClip.length);
     }
 

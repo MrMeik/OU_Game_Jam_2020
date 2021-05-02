@@ -6,7 +6,7 @@ public class CheckpointManager : MonoBehaviour
 {
     public Checkpoint CurrentCheckpoint;
 
-    public GameObject Player;
+    public PlayerMovement Player;
 
     [HideInInspector]
     public HurtableObject PlayerHealth;
@@ -27,7 +27,8 @@ public class CheckpointManager : MonoBehaviour
 
     public void ResetPlayer()
     {
-        Player.transform.position = CurrentCheckpoint.transform.position;
+        Player.TeleportTo(CurrentCheckpoint.transform.position);
+        //Player.transform.position = CurrentCheckpoint.transform.position;
         PlayerHealth.ResetHealth();
     }
 }
