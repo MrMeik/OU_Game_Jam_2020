@@ -89,7 +89,15 @@ public class Projectile : MonoBehaviour
         {
             var hurtable = collider.GetComponent<HurtableObject>();
             hurtable.ModifyHealth(-Damage);
-            BlowUp(collider.CompareTag("Player") ? AudioType.Player : AudioType.Enemy, Mathf.Lerp(1f, 2f, 1f - ((float)hurtable.CurrentHealth / hurtable.MaxHealth)));
+            if (collider.CompareTag("Player"))
+            {
+                BlowUp(AudioType.Player, Mathf.Lerp(1f, 2f, 1f - ((float)hurtable.CurrentHealth / hurtable.MaxHealth)));
+            }
+            else
+            {
+                BlowUp(AudioType.Enemy, Mathf.Lerp(1f, 2f, 1f - ((float)hurtable.CurrentHealth / hurtable.MaxHealth)));
+                collider.GetComponent<Turret>().StopShielding();
+            }
         }
         else BlowUp();
     }

@@ -156,8 +156,9 @@ public class Turret : MonoBehaviour
         return Vector3.Angle(projDelta, toMe) < 30f;
     }
 
-    private void StopShielding()
+    public void StopShielding()
     {
+        LeanTween.cancel(shieldingId);
         if(status == Status.Shielding)
         {
             indicator.Flash(Indicator.Type.Red);
