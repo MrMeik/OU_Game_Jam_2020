@@ -11,4 +11,12 @@ public class BulletCollector : MonoBehaviour
     {
         Instance = this;
     }
+
+    public void ClearChildren()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 }

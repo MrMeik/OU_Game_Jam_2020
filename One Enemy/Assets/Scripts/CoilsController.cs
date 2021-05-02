@@ -17,17 +17,28 @@ public class CoilsController : MonoBehaviour
     [SerializeField]
     private ParticleSystem CoilPS2;
 
+    [SerializeField]
+    private AudioClip onEnableClip;
+    [SerializeField]
+    private AudioClip onDisableClip;
+
+    private AudioSource source;
+    private bool StillStart = true;
+
     private BoxCollider boxCollider;
 
     // Start is called before the first frame update
     void Start()
     {
+        source = GetComponent<AudioSource>();
         CreateCenteredBoxCollider();
         if(Coil1.transform.localPosition.x == Coil2.transform.localPosition.x) SetupXAligned();
         else if(Coil1.transform.localPosition.z == Coil2.transform.localPosition.z) SetupZAligned();
         else throw new System.Exception("Coils not aligned");
         if (StartState is false) TurnOffGate();
         else TurnOnGate();
+
+        StillStart = false;
     }
 
     private void SetupXAligned()
@@ -53,6 +64,7 @@ public class CoilsController : MonoBehaviour
         CoilPS1.Play();
         CoilPS2.Play();
         boxCollider.enabled = true;
+        if (StillStart is false) source.PlayOneShot(onEnableClip);
     }
 
     public void TurnOffGate()
@@ -60,5 +72,6 @@ public class CoilsController : MonoBehaviour
         CoilPS1.Stop();
         CoilPS2.Stop();
         boxCollider.enabled = false;
+        if (StillStart is false) source.PlayOneShot(onDisableClip);
     }
 }

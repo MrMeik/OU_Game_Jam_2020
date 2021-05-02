@@ -25,5 +25,11 @@ public class HurtableObject : MonoBehaviour
         else HealthModified?.Invoke(this);
     }
 
+    public void ResetHealth()
+    {
+        int delta = maxHealth - currentHealth;
+        ModifyHealth(delta);
+    }
+
     public bool IsAlive() => currentHealth > 0;
 }

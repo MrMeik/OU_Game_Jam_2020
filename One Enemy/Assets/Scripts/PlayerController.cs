@@ -14,7 +14,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private ProjectileLauncher weapon;
 
-    private bool hasShield = true;
+
+    [SerializeField]
+    private bool hasShield = false;
 
     private void Start()
     {
@@ -43,6 +45,11 @@ public class PlayerController : MonoBehaviour
                 movement.CanMove = true;
             }
         }
+    }
+
+    public void EnableShield()
+    {
+        hasShield = true;
     }
 
     public void EnableMega()

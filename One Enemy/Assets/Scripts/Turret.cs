@@ -106,6 +106,7 @@ public class Turret : MonoBehaviour
             {
                 var proj = other.GetComponent<Projectile>();
                 if (proj.IsIgnoringCollision(hitbox)) return;
+                if (ShouldBeScared(proj) is false) return;
             }
             LeanTween.cancel(shieldingId);
         }

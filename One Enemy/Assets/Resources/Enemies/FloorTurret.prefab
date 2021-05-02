@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanShield: 1
   DeployHeight: 1
-  ReactionTime: 0.25
+  ReactionTime: 0.3
   shield: {fileID: 2438842690643846922}
   weaponArm: {fileID: 7813799648108955073}
   weapon: {fileID: 2898227701595595314}
@@ -318,12 +318,15 @@ MonoBehaviour:
   FireOnStart: 0
   LoopFire: 1
   RefireRate: 1
+  MegaFire: 0
+  SuperMegaFire: 0
   projectilePrefab: {fileID: 649609381424567445, guid: 7450274c3f5d7024dbd667f84d7eb1db, type: 3}
   ejectionPoint: {fileID: 2898227701010188654}
   sourceColliders:
   - {fileID: 2438842690643847157}
   - {fileID: 4512260057024246510}
   movementSource: {fileID: 0}
+  extraPizzazz: {fileID: 0}
 --- !u!82 &4961971164466895594
 AudioSource:
   m_ObjectHideFlags: 0

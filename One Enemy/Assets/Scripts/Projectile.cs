@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public int FlightSpeed = 10;
-    public int MaxLifeTime = 5;
+    public int MaxLifeTime = 3;
     public int Damage = 10;
     public bool MegaBullet = false;
     public bool IgnoreShields = false;
@@ -80,7 +80,7 @@ public class Projectile : MonoBehaviour
                     ClearCollisions();
                     IgnoreCollision(collider);
                     ReflectAcross(collision.GetContact(0).normal);
-                    FlightSpeed += (int)(FlightSpeed * 0.25f);
+                    FlightSpeed += (int)(FlightSpeed * 0.5f);
                 }
                 else BlowUp();
             }
