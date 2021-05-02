@@ -17,6 +17,12 @@ public class Indicator : MonoBehaviour
 
     private Renderer rend;
 
+    private Type currentType = Type.Green;
+    private float currentTime = 0f;
+    private bool currentIsOn = false;
+
+    public float CurrentFlashTime => currentTime * 2f;
+
     public void TurnOff()
     {
         StopAnimation();
@@ -29,11 +35,47 @@ public class Indicator : MonoBehaviour
         SetLightMaterial(type);
     }
 
-    private void StopAnimation() => LeanTween.cancel(id);
+    private void StopAnimation()
+    {
+        if (IsFlashing())
+        {
+            LeanTween.cancel(id);
+            id = -1;
+        }
+    }
+
+    private bool IsFlashing() => id != -1;
+
+    public void Flash(Type type) => Flash(type, (currentTime == 0) ? 1 : currentTime);
 
     public void Flash(Type type, float pulseTime)
     {
-        id = LoopTween(type, pulseTime / 2f, true);
+        StopAnimation();
+        currentType = type;
+        currentTime = pulseTime / 2f;
+        currentIsOn = true;
+        id = LoopTween(currentType, currentTime, true);
+    }
+
+    public void ChangeFlashTime(float newFlashTime)
+    {
+        if (IsFlashing())
+        {
+            Debug.Log("New flash :" + newFlashTime / 2f);
+            Debug.Log("Old flash :" + currentTime);
+            if (newFlashTime == CurrentFlashTime) return;
+            currentTime = newFlashTime / 2f;
+
+            var descr = LeanTween.descr(id);
+            float timeLeft = descr.time - descr.passed;
+            timeLeft = Mathf.Clamp(timeLeft, 0f, currentTime);
+            StopAnimation();
+            id = LeanTween.delayedCall(timeLeft, () => id = LoopTween(currentType, currentTime, !currentIsOn)).id;
+        }
+        else
+        {
+            currentTime = newFlashTime / 2f;
+        }
     }
 
     private int LoopTween(Type type, float callTime, bool isOn)
@@ -44,9 +86,11 @@ public class Indicator : MonoBehaviour
 
     private void SetLightMaterial(Type type, bool isOn = true)
     {
+        this.currentIsOn = isOn;
         if (isOn is false) rend.sharedMaterial = off;
         else
         {
+            currentType = type;
             rend.sharedMaterial = Lookup(type);
         }
     }

@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
 {
     public int FlightSpeed = 10;
     public int MaxLifeTime = 5;
+    public int Damage = 10;
 
     private Vector3 movementDirection;
     private int killId = -1;
@@ -47,10 +48,9 @@ public class Projectile : MonoBehaviour
                 else BlowUp();
             }
         }
-        else if (collider.CompareTag("Player"))
+        else if (collider.CompareTag("Player") || collider.CompareTag("Enemy"))
         {
-            //Hurt player
-            Debug.Log("Ouch");
+            collider.GetComponent<HurtableObject>().ModifyHealth(-Damage);
             BlowUp();
         }
         else BlowUp();

@@ -5,6 +5,8 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Instance;
+
     [SerializeField]
     private Shield shield;
     [SerializeField]
@@ -14,6 +16,17 @@ public class PlayerController : MonoBehaviour
 
     private bool hasShield = true;
 
+    private void Start()
+    {
+        Instance = this;
+    }
+
+    public Vector3 Position()
+    {
+        Vector3 pos = transform.position;
+        pos.y = 1f;
+        return pos;
+    }
 
     public void OnShieldButton(CallbackContext context)
     {
