@@ -17,11 +17,14 @@ public class ProjectileLauncher : MonoBehaviour
     [SerializeField]
     private MovingObject movementSource;
 
+    private AudioSource source;
+
     private int fireId = -1;
     private bool canFireAgain = true;
 
     public void Start()
     {
+        source = GetComponent<AudioSource>();
         if(FireOnStart) Fire();
     }
 
@@ -51,6 +54,7 @@ public class ProjectileLauncher : MonoBehaviour
         if (checkCanFire && canFireAgain is false) return;
         HaltFire();
 
+        source.Play();
         var newObj = Instantiate(projectilePrefab, ejectionPoint.transform.position, this.transform.rotation, BulletCollector.Instance.transform);
         var projectile = newObj.GetComponent<Projectile>();
         if (sourceColliders.Length != 0) foreach (var collider in sourceColliders) projectile.IgnoreCollision(collider);

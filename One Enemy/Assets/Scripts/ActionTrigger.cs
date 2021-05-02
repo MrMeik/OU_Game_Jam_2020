@@ -43,7 +43,7 @@ public class ActionTrigger : MonoBehaviour
             {
                 exited = true;
                 OnPlayerExit?.Invoke();
-                if (WriteDebug) Debug.Log("Player Enter Once", this);
+                if (WriteDebug) Debug.Log("Player Exit Once", this);
             }
         }
         else
@@ -51,7 +51,7 @@ public class ActionTrigger : MonoBehaviour
             if (other.CompareTag("Player"))
             {
                 OnPlayerExit?.Invoke();
-                if (WriteDebug) Debug.Log("Player Enter", this);
+                if (WriteDebug) Debug.Log("Player Exit", this);
             }
         }
     }

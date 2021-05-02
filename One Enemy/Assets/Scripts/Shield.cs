@@ -22,7 +22,7 @@ public class Shield : MonoBehaviour
 
     private Vector3 inScale = new Vector3(.7f, 1, .7f);
     private Vector3 outScale = Vector3.one;
-    private Vector3 fullScale = new Vector3(1.4f, 1, 1.4f);
+    private Vector3 fullScale = Vector3.zero; 
     private int shieldAnimationId = -1;
     private bool fullCycleUsed = false;
 
@@ -34,7 +34,7 @@ public class Shield : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shieldRenderer = shieldVisual.GetComponent<Renderer>();
+        TrySetUp();
     }
 
     public void DisengageShield()
@@ -46,15 +46,25 @@ public class Shield : MonoBehaviour
 
     public void EngageShield()
     {
+        if (shieldStage != Stage.Off) return;
+        gameObject.SetActive(true);
+        TrySetUp();
         shieldStage = Stage.Engaging;
         fullCycleUsed = false;
         LeanTween.cancel(shieldAnimationId);
         shieldVisual.transform.localScale = inScale;
         shieldRenderer.sharedMaterial = initColor;
 
-        gameObject.SetActive(true);
-
         shieldAnimationId = LeanTween.scale(shieldVisual, fullScale, ShieldEngageTime).setEaseOutElastic().setOnComplete(() => WaitOnFull()).id;
+    }
+
+    private void TrySetUp()
+    {
+        if (fullScale == Vector3.zero)
+        {
+            fullScale = shieldVisual.transform.localScale;
+            shieldRenderer = shieldVisual.GetComponent<Renderer>();
+        }
     }
 
     private void WaitOnFull()

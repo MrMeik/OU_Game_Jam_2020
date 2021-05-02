@@ -46,7 +46,7 @@ public class Indicator : MonoBehaviour
 
     private bool IsFlashing() => id != -1;
 
-    public void Flash(Type type) => Flash(type, (currentTime == 0) ? 1 : currentTime);
+    public void Flash(Type type) => Flash(type, (currentTime == 0) ? 1 : currentTime * 2f);
 
     public void Flash(Type type, float pulseTime)
     {
@@ -61,8 +61,6 @@ public class Indicator : MonoBehaviour
     {
         if (IsFlashing())
         {
-            Debug.Log("New flash :" + newFlashTime / 2f);
-            Debug.Log("Old flash :" + currentTime);
             if (newFlashTime == CurrentFlashTime) return;
             currentTime = newFlashTime / 2f;
 

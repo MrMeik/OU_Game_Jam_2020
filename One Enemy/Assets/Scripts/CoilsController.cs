@@ -24,6 +24,7 @@ public class CoilsController : MonoBehaviour
         if(Coil1.transform.localPosition.x == Coil2.transform.localPosition.x) SetupXAligned();
         else if(Coil1.transform.localPosition.z == Coil2.transform.localPosition.z) SetupZAligned();
         else throw new System.Exception("Coils not aligned");
+        TurnOffGate();
     }
 
     private void SetupXAligned()
@@ -44,9 +45,17 @@ public class CoilsController : MonoBehaviour
         boxCollider.center = (Coil1.transform.localPosition + Coil2.transform.localPosition) / 2f;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TurnOnGate()
     {
-        
+        CoilPS1.Play();
+        CoilPS2.Play();
+        boxCollider.enabled = true;
+    }
+
+    public void TurnOffGate()
+    {
+        CoilPS1.Stop();
+        CoilPS2.Stop();
+        boxCollider.enabled = false;
     }
 }

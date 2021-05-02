@@ -6,6 +6,7 @@ public class Turret : MonoBehaviour
 {
     public bool CanShield = false;
     public float DeployHeight;
+    public float ReactionTime = 0.1f;
 
     private Collider hitbox;
     [SerializeField]
@@ -22,7 +23,11 @@ public class Turret : MonoBehaviour
     private const float retargetTime = 0.5f;
     private float retargetCurrentTime = retargetTime;
 
+    [SerializeField]
     private Status status = Status.Disabled;
+
+    private int shieldingId = -1;
+
     private int animationId = -1;
     private float deployTime = 0.5f;
 
@@ -53,6 +58,12 @@ public class Turret : MonoBehaviour
                 weapon.transform.LookAt(PlayerController.Instance.Position(), Vector3.up);
                 weapon.Fire();
                 break;
+            case Status.Shielding:
+                if(shieldingId == -1) //shield.IsOn() && !shield.IsEngaging())
+                {
+                    shieldingId = LeanTween.delayedCall(1f, () => StopShielding()).id;
+                }
+                break;
         }
     }
 
@@ -61,6 +72,58 @@ public class Turret : MonoBehaviour
         Vector3 source = weapon.transform.position;
         Vector3 delta = (PlayerController.Instance.Position() - source).normalized;
         return Physics.Raycast(source, delta, out RaycastHit hit) && hit.collider.CompareTag("Player");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!IsActive() || !CanShield || shield.IsEngaging()) return;
+        if (status == Status.Shielding)
+        {
+            if (!shield.IsOn()) return;
+            if (other.CompareTag("Projectile"))
+            {
+                var proj = other.GetComponent<Projectile>();
+                if (proj.IsIgnoringCollision(hitbox)) return;
+            }
+            LeanTween.cancel(shieldingId);
+        }
+        if (other.CompareTag("Projectile"))
+        {
+            var proj = other.GetComponent<Projectile>();
+            if (proj.IsIgnoringCollision(hitbox)) return;
+            status = Status.Shielding;
+            indicator.Flash(Indicator.Type.Purple);
+            shieldingId = LeanTween.delayedCall(ReactionTime, () => { shield.EngageShield(); shieldingId = -1; }).id;
+        }
+        else if (other.CompareTag("Player"))
+        {
+            status = Status.Shielding;
+            indicator.Flash(Indicator.Type.Purple);
+            shieldingId = LeanTween.delayedCall(ReactionTime, () => { shield.EngageShield(); shieldingId = -1; }).id;
+        }
+    }
+
+    private void StopShielding()
+    {
+        if(status == Status.Shielding)
+        {
+            indicator.Flash(Indicator.Type.Red);
+            status = Status.Firing;
+        }
+        shield.DisengageShield();
+    }
+
+    public void EnableLogic()
+    {
+        if (health.IsAlive() is false) return;
+        status = Status.Deployed;
+        Hide();
+    }
+
+    public void DisableLogic()
+    {
+        Hide(true);
+        indicator.TurnOff();
     }
 
     public void Hide(bool disableAfter = false)
@@ -97,6 +160,9 @@ public class Turret : MonoBehaviour
     public void Kill()
     {
         Hide(true);
+        LeanTween.cancel(shieldingId);
+        shield.DisengageShield();
+        weapon.HaltFire();
     }
 
     private float CalculateHealthPulseTime()
@@ -126,7 +192,6 @@ public class Turret : MonoBehaviour
         status == Status.Disabled || status == Status.Hidden;
     private bool IsActive() => 
         status == Status.Deployed || status == Status.Shielding || status == Status.Firing;
-    
 
     private enum Status
     {
