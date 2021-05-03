@@ -139,6 +139,7 @@ public class Projectile : MonoBehaviour
         LeanTween.alpha(Visuals, 0f, .25f);
         Explosion.SetActive(true);
         var hitClip = GetClip(clip);
+        source.volume = .2f;
         source.volume *= volumeScaler;
         if(source.enabled is true) source.PlayOneShot(hitClip);
         Destroy(gameObject, hitClip.length);
