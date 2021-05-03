@@ -30,6 +30,8 @@ public class Projectile : MonoBehaviour
     private AudioClip PlayerHit;
     [SerializeField]
     private AudioClip EnemyHit;
+    [SerializeField]
+    private AudioClip ShieldHit;
 
     private AudioSource source;
 
@@ -80,6 +82,8 @@ public class Projectile : MonoBehaviour
                     ClearCollisions();
                     IgnoreCollision(collider);
                     ReflectAcross(collision.GetContact(0).normal);
+                    source.PlayOneShot(ShieldHit);
+                    source.volume = .8f;
                     FlightSpeed += (int)(FlightSpeed * 0.5f);
                 }
                 else BlowUp();
@@ -91,11 +95,11 @@ public class Projectile : MonoBehaviour
             hurtable.ModifyHealth(-Damage);
             if (collider.CompareTag("Player"))
             {
-                BlowUp(AudioType.Player, Mathf.Lerp(1f, 2f, 1f - ((float)hurtable.CurrentHealth / hurtable.MaxHealth)));
+                BlowUp(AudioType.Player, Mathf.Lerp(3f, 5f, 1f - ((float)hurtable.CurrentHealth / hurtable.MaxHealth)));
             }
             else
             {
-                BlowUp(AudioType.Enemy, Mathf.Lerp(1f, 2f, 1f - ((float)hurtable.CurrentHealth / hurtable.MaxHealth)));
+                BlowUp(AudioType.Enemy, Mathf.Lerp(3f, 5f, 1f - ((float)hurtable.CurrentHealth / hurtable.MaxHealth)));
                 collider.GetComponent<Turret>().StopShielding();
             }
         }

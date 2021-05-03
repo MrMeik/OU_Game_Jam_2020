@@ -81,12 +81,15 @@ MonoBehaviour:
   FlightSpeed: 5
   MaxLifeTime: 5
   Damage: 10
+  MegaBullet: 0
+  IgnoreShields: 0
   Visuals: {fileID: 649609381639269102}
   Trails: {fileID: 2187210928668465799}
   Explosion: {fileID: 4132961828554197587}
   WallHit: {fileID: 8300000, guid: fc92e88f870d8204fa202816a78b3e4a, type: 3}
   PlayerHit: {fileID: 8300000, guid: bc0aff7713ad544419c283af222bedcb, type: 3}
   EnemyHit: {fileID: 8300000, guid: 3bc59f2d46ed87246b1a6ddcf37d7484, type: 3}
+  ShieldHit: {fileID: 8300000, guid: 700319d355b30ca40bab21db541d6382, type: 3}
 --- !u!82 &7295104370066159792
 AudioSource:
   m_ObjectHideFlags: 0
