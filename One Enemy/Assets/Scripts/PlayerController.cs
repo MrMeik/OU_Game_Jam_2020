@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
+        if (turnShieldOff && turnShieldOn) turnShieldOn = false;
         if(shieldInputCounter <= 0f)
         {
             if (turnShieldOn)
@@ -56,6 +57,11 @@ public class PlayerController : MonoBehaviour
         else
         {
             shieldInputCounter -= Time.deltaTime;
+        }
+
+        if(movement.CanMove is false && movement.CanTurn is false && !shield.IsOn())
+        {
+            turnShieldOff = true;
         }
 
         if (turnShieldOff)
@@ -74,14 +80,10 @@ public class PlayerController : MonoBehaviour
             if (context.started)
             {
                 turnShieldOn = true;
-                //shield.EngageShield();
-                //movement.CanMove = false;
             }
             else if (context.performed is false)
             {
                 turnShieldOff = true;
-                //shield.DisengageShield();
-                //movement.CanMove = true;
             }
         }
     }
